@@ -37,6 +37,17 @@ transition:transform .15s;display:inline-block}
 details.sec[open]>summary::before{transform:rotate(90deg)}
 details.sec>summary:hover{color:var(--acc)}
 .count{color:var(--dim);font-weight:400;font-size:13px}
+/* Nested drill-down. Its own class so the page-level expand/collapse button
+   (which targets details.sec) does not toggle these too -- opening every book
+   list at once buries the summary the section exists to show. */
+details.sub{margin:8px 0 0 4px}
+details.sub>summary{font-size:13px;font-weight:500;cursor:pointer;list-style:none;
+padding:5px 0;color:var(--dim);display:flex;align-items:center;gap:7px}
+details.sub>summary::-webkit-details-marker{display:none}
+details.sub>summary::before{content:'\25B8';font-size:10px;transition:transform .15s;
+display:inline-block}
+details.sub[open]>summary::before{transform:rotate(90deg)}
+details.sub>summary:hover{color:var(--acc)}
 .card{background:var(--card);border:1px solid var(--line);border-radius:9px;
 overflow-x:auto;margin-bottom:6px}
 table{border-collapse:collapse;width:100%;min-width:520px}
@@ -69,7 +80,7 @@ tr.hidden{display:none}
 </style>
 <div class="topbar"><div>
 <h1>Soccer xlow tracker</h1>
-<div class="sub">snapshot 2026-08-09 12:43 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
+<div class="sub">snapshot 2026-08-09 12:45 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
 </div><div class="tools">
 <input class="filter" id="filterBox" type="search" placeholder="Filter league / team…" aria-label="Filter rows">
 <button class="tool" id="expandBtn">Collapse all</button>
@@ -156,11 +167,269 @@ tr.hidden{display:none}
 <details class="sec" open><summary>Market maker <span class="count">(242 paper books)</span></summary>
 <div class="card"><table>
 <tr><th>Legs filled</th><th>Books</th><th>Share</th><th>Total</th><th>Per book</th></tr>
-<tr><td>3 of 3 — complete</td><td>88</td><td class="dim">36%</td><td class="good">+121.4c</td><td class="good">+1.38c</td></tr>
-<tr><td>2 of 3 — stranded</td><td>59</td><td class="dim">24%</td><td class="bad">-449.5c</td><td class="bad">-7.62c</td></tr>
-<tr><td>1 of 3</td><td>52</td><td class="dim">21%</td><td class="bad">-118.0c</td><td class="bad">-2.27c</td></tr>
-<tr><td>none filled</td><td>43</td><td class="dim">18%</td><td class="dim">+0.0c</td><td class="dim">+0.00c</td></tr>
+<tr class="nosort"><td>3 of 3 — complete</td><td>88</td><td class="dim">36%</td><td class="good">+121.4c</td><td class="good">+1.38c</td></tr>
+<tr class="nosort"><td>2 of 3 — stranded</td><td>59</td><td class="dim">24%</td><td class="bad">-449.5c</td><td class="bad">-7.62c</td></tr>
+<tr class="nosort"><td>1 of 3</td><td>52</td><td class="dim">21%</td><td class="bad">-118.0c</td><td class="bad">-2.27c</td></tr>
+<tr class="nosort"><td>none filled</td><td>43</td><td class="dim">18%</td><td class="dim">+0.0c</td><td class="dim">+0.00c</td></tr>
 </table></div>
+<details class="sub"><summary>3 of 3 — complete <span class="count">(88 books)</span></summary>
+<div class="card"><table>
+<tr><th>Date</th><th>Lg</th><th>Match</th><th>Legs filled</th><th>Gross @post</th><th>Regime</th><th>P&amp;L</th></tr>
+<tr><td class="dim">07-30</td><td>AR1</td><td>Independ. Rivadavia vs Huracan</td><td class="dim">draw,home,away</td><td class="dim">-2.0c</td><td class="dim">v3</td><td class="bad">-3.5c</td></tr>
+<tr><td class="dim">07-28</td><td>BR2</td><td>Fortaleza EC vs Botafogo SP</td><td class="dim">draw,away,home</td><td class="dim">-3.0c</td><td class="dim">v2</td><td class="bad">-3.0c</td></tr>
+<tr><td class="dim">07-29</td><td>AR1</td><td>Instituto Cordoba vs Platense</td><td class="dim">home,draw,away</td><td class="dim">-1.0c</td><td class="dim">v3</td><td class="bad">-2.5c</td></tr>
+<tr><td class="dim">07-28</td><td>AR1</td><td>Banfield vs Sarmiento Junin</td><td class="dim">home,draw,away</td><td class="dim">-1.0c</td><td class="dim">v2</td><td class="bad">-2.2c</td></tr>
+<tr><td class="dim">07-29</td><td>AR1</td><td>Defensa Y Justicia vs Deportivo Riestra</td><td class="dim">draw,away,home</td><td class="dim">+0.0c</td><td class="dim">v3</td><td class="bad">-1.6c</td></tr>
+<tr><td class="dim">07-30</td><td>AR1</td><td>Talleres Cordoba vs Velez Sarsfield</td><td class="dim">away,draw,home</td><td class="dim">+0.0c</td><td class="dim">v3</td><td class="bad">-1.5c</td></tr>
+<tr><td class="dim">07-27</td><td>BR2</td><td>Sport Recife vs Cuiaba</td><td class="dim">away,home,draw</td><td class="dim">+0.0c</td><td class="dim">v2</td><td class="bad">-1.4c</td></tr>
+<tr><td class="dim">07-31</td><td>KO1</td><td>Jeonbuk Motors vs FC Seoul</td><td class="dim">home,draw,away</td><td class="dim">+0.0c</td><td class="dim">v3</td><td class="bad">-1.4c</td></tr>
+<tr><td class="dim">07-27</td><td>BR2</td><td>Atletico Goianiense vs Operario-PR</td><td class="dim">away,home,draw</td><td class="dim">+0.0c</td><td class="dim">v2</td><td class="bad">-1.4c</td></tr>
+<tr><td class="dim">08-01</td><td>PL1</td><td>Piast Gliwice vs Wisla Krakow</td><td class="dim">away,home,draw</td><td class="dim">+0.0c</td><td class="dim">v3</td><td class="bad">-1.4c</td></tr>
+<tr><td class="dim">07-28</td><td>BR2</td><td>Juventude vs Avai</td><td class="dim">away,home,draw</td><td class="dim">+0.0c</td><td class="dim">v2</td><td class="bad">-1.3c</td></tr>
+<tr><td class="dim">07-27</td><td>NO1</td><td>Rosenborg vs Fredrikstad</td><td class="dim">draw,away,home</td><td class="dim">+0.0c</td><td class="dim">v2</td><td class="bad">-1.2c</td></tr>
+<tr><td class="dim">07-27</td><td>DK1</td><td>Randers FC vs Silkeborg</td><td class="dim">away,home,draw</td><td class="dim">+1.0c</td><td class="dim">v2</td><td class="bad">-0.7c</td></tr>
+<tr><td class="dim">08-04</td><td>CO1</td><td>Llaneros vs Fortaleza FC</td><td class="dim">away,home,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="bad">-0.7c</td></tr>
+<tr><td class="dim">07-29</td><td>NWSL</td><td>Utah Royals W vs Washington Spirit W</td><td class="dim">home,draw,away</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="bad">-0.6c</td></tr>
+<tr><td class="dim">07-30</td><td>BSA</td><td>Coritiba vs Cruzeiro</td><td class="dim">away,home,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="bad">-0.5c</td></tr>
+<tr><td class="dim">07-26</td><td>CO1</td><td>Alianza Valledupar vs Fortaleza FC</td><td class="dim">draw,away,home</td><td class="dim">+1.0c</td><td class="dim">v1</td><td class="bad">-0.5c</td></tr>
+<tr><td class="dim">07-27</td><td>BR2</td><td>CRB vs Vila Nova</td><td class="dim">home,away,draw</td><td class="dim">+1.0c</td><td class="dim">v2</td><td class="bad">-0.4c</td></tr>
+<tr><td class="dim">07-27</td><td>SE1</td><td>BK Hacken vs AIK Stockholm</td><td class="dim">draw,home,away</td><td class="dim">+1.0c</td><td class="dim">v2</td><td class="bad">-0.2c</td></tr>
+<tr><td class="dim">07-26</td><td>PE1</td><td>Deportivo Garcilaso vs FC Cajamarca</td><td class="dim">draw,away,home</td><td class="dim">+1.0c</td><td class="dim">v1</td><td class="bad">-0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CN1</td><td>Chengdu Better City vs Wuhan Three Towns</td><td class="dim">away,draw,home</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="bad">-0.0c</td></tr>
+<tr><td class="dim">07-29</td><td>NWSL</td><td>Kansas City W vs Racing Louisville W</td><td class="dim">home,draw,away</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+0.1c</td></tr>
+<tr><td class="dim">08-07</td><td>BR2</td><td>Ceara vs Ponte Preta</td><td class="dim">away,home,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+0.5c</td></tr>
+<tr><td class="dim">07-28</td><td>BR2</td><td>Ponte Preta vs Athletic Club</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v2</td><td class="good">+0.6c</td></tr>
+<tr><td class="dim">08-05</td><td>NWSL</td><td>Denver Summit W vs North Carolina Courage W</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+0.7c</td></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>Flamengo vs Sao Paulo</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v1</td><td class="good">+0.8c</td></tr>
+<tr><td class="dim">07-31</td><td>MX1</td><td>Puebla vs Guadalajara Chivas</td><td class="dim">home,away,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+0.9c</td></tr>
+<tr><td class="dim">07-26</td><td>NWSL</td><td>Washington Spirit W vs Denver Summit W</td><td class="dim">draw,home,away</td><td class="dim">+2.0c</td><td class="dim">v1</td><td class="good">+0.9c</td></tr>
+<tr><td class="dim">07-29</td><td>USL</td><td>Louisville City vs Birmingham Legion</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">07-31</td><td>HR1</td><td>Dinamo Zagreb vs NK Slaven Belupo</td><td class="dim">draw,home,away</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CAN</td><td>HFX Wanderers FC vs Forge</td><td class="dim">away,home,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CL1</td><td>Universidad de Concepcion vs A. Italiano</td><td class="dim">draw,away,home</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-07</td><td>DK1</td><td>Sonderjyske vs Viborg</td><td class="dim">draw,home,away</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CO1</td><td>Jaguares vs Atletico Nacional</td><td class="dim">home,away,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">07-31</td><td>KO1</td><td>Gangwon FC vs Bucheon FC 1995</td><td class="dim">draw,away,home</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-02</td><td>NWSL</td><td>Utah Royals W vs Portland Thorns W</td><td class="dim">draw,home,away</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CZ1</td><td>Slovan Liberec vs Teplice</td><td class="dim">draw,away,home</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-03</td><td>SE1</td><td>Djurgardens IF vs Vasteras SK FK</td><td class="dim">draw,home,away</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-01</td><td>SE1</td><td>BK Hacken vs Kalmar FF</td><td class="dim">away,draw,home</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-07</td><td>PE1</td><td>Sport Huancayo vs Club Deportivo Los Chankas</td><td class="dim">away,home,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">08-02</td><td>PE1</td><td>Sporting Cristal vs Juan Pablo II College</td><td class="dim">away,home,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="good">+1.0c</td></tr>
+<tr><td class="dim">07-27</td><td>CL1</td><td>Union La Calera vs Everton de Vina</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v2</td><td class="good">+1.6c</td></tr>
+<tr><td class="dim">07-28</td><td>CAN</td><td>Cavalry FC vs Supra du Quebec</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v2</td><td class="good">+1.9c</td></tr>
+<tr><td class="dim">08-02</td><td>DK1</td><td>Brondby vs Viborg</td><td class="dim">away,home,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-02</td><td>MX1</td><td>Atlas vs Monterrey</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-02</td><td>MLS</td><td>St. Louis City vs Real Salt Lake</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-30</td><td>CO1</td><td>Bucaramanga vs Llaneros</td><td class="dim">draw,home,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-30</td><td>CN1</td><td>Henan Jianye vs Dalian Zhixing</td><td class="dim">away,home,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-03</td><td>CO1</td><td>Santa Fe vs Once Caldas</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-31</td><td>MX1</td><td>FC Juarez vs U.N.A.M. - Pumas</td><td class="dim">away,home,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-03</td><td>MX1</td><td>Toluca vs Necaxa</td><td class="dim">home,away,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-31</td><td>MX1</td><td>Atletico San Luis vs Club Tijuana</td><td class="dim">home,away,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-03</td><td>AR1</td><td>Central Cordoba de Santiago vs San Lorenzo</td><td class="dim">home,draw,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CAN</td><td>Pacific FC vs Supra du Quebec</td><td class="dim">draw,home,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CN1</td><td>Beijing Guoan vs Hangzhou Greentown</td><td class="dim">away,draw,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-08</td><td>JP1</td><td>Avispa Fukuoka vs Vissel Kobe</td><td class="dim">home,draw,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-04</td><td>CO1</td><td>Deportes Tolima vs Independiente Medellin</td><td class="dim">home,draw,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CN1</td><td>SHANGHAI SIPG vs Shandong Luneng</td><td class="dim">away,home,draw</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-31</td><td>PE1</td><td>Club Deportivo Los Chankas vs Comerciantes Unidos</td><td class="dim">home,draw,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">08-02</td><td>MX1</td><td>Club America vs Santos Laguna</td><td class="dim">home,draw,away</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="good">+2.0c</td></tr>
+<tr><td class="dim">07-29</td><td>BSA</td><td>Internacional vs Flamengo</td><td class="dim">away,draw,home</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+2.7c</td></tr>
+<tr><td class="dim">08-02</td><td>USL</td><td>Birmingham Legion vs Rhode Island</td><td class="dim">away,home,draw</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+2.9c</td></tr>
+<tr><td class="dim">08-02</td><td>PE1</td><td>UCV Moquegua vs FBC Melgar</td><td class="dim">home,away,draw</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-05</td><td>USL</td><td>FC Tulsa vs Sacramento Republic</td><td class="dim">draw,away,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-03</td><td>AR1</td><td>Sarmiento Junin vs Independ. Rivadavia</td><td class="dim">draw,away,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-03</td><td>SC0</td><td>Celtic vs Dundee</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-03</td><td>SE1</td><td>Halmstad vs Sirius</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CZ1</td><td>Sparta Praha vs Zlin</td><td class="dim">draw,away,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-02</td><td>MLS</td><td>Minnesota United FC vs San Diego</td><td class="dim">away,draw,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-07</td><td>PE1</td><td>Universitario vs Sporting Cristal</td><td class="dim">home,away,draw</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CL1</td><td>Concepción vs U. Catolica</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>Chicago Fire vs Charlotte</td><td class="dim">draw,home,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-01</td><td>USL</td><td>Miami FC vs Detroit City</td><td class="dim">draw,home,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-03</td><td>DK1</td><td>Odense vs Sonderjyske</td><td class="dim">home,away,draw</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-07</td><td>P1</td><td>Estoril vs Famalicao</td><td class="dim">draw,home,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-02</td><td>KO1</td><td>Daejeon Citizen vs Gwangju FC</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">07-31</td><td>KO1</td><td>Pohang Steelers vs Gimcheon Sangmu FC</td><td class="dim">away,home,draw</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-01</td><td>AR1</td><td>Belgrano Cordoba vs Argentinos JRS</td><td class="dim">draw,away,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-02</td><td>AR1</td><td>Aldosivi vs Gimnasia L.P.</td><td class="dim">draw,home,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-03</td><td>AR1</td><td>Huracan vs Atletico Tucuman</td><td class="dim">away,home,draw</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-03</td><td>AR1</td><td>Platense vs Talleres Cordoba</td><td class="dim">home,draw,away</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="good">+3.0c</td></tr>
+<tr><td class="dim">08-06</td><td>PE1</td><td>Alianza Atletico vs Cienciano</td><td class="dim">draw,home,away</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+4.0c</td></tr>
+<tr><td class="dim">08-04</td><td>CO1</td><td>Millonarios vs Deportivo Pasto</td><td class="dim">draw,away,home</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+4.0c</td></tr>
+<tr><td class="dim">08-02</td><td>USL</td><td>Sacramento Republic vs Sporting JAX</td><td class="dim">home,away,draw</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+4.0c</td></tr>
+<tr><td class="dim">07-31</td><td>NWSL</td><td>North Carolina Courage W vs Orlando Pride W</td><td class="dim">home,draw,away</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+4.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CO1</td><td>Fortaleza FC vs Deportivo Pereira</td><td class="dim">away,home,draw</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+4.0c</td></tr>
+<tr><td class="dim">07-31</td><td>MLS</td><td>New York City FC vs Toronto FC</td><td class="dim">home,draw,away</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="good">+4.0c</td></tr>
+<tr><td class="dim">08-02</td><td>PE1</td><td>Cienciano vs Universitario</td><td class="dim">draw,home,away</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="good">+6.0c</td></tr>
+</table></div></details>
+<details class="sub"><summary>2 of 3 — stranded <span class="count">(59 books)</span></summary>
+<div class="card"><table>
+<tr><th>Date</th><th>Lg</th><th>Match</th><th>Legs filled</th><th>Gross @post</th><th>Regime</th><th>P&amp;L</th></tr>
+<tr><td class="dim">07-26</td><td>SE1</td><td>Gais vs Halmstad</td><td class="dim">away,draw</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="bad">-65.0c</td></tr>
+<tr><td class="dim">07-30</td><td>BSA</td><td>Corinthians vs Atletico Paranaense</td><td class="dim">away,draw</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="bad">-49.5c</td></tr>
+<tr><td class="dim">07-29</td><td>USL</td><td>Pittsburgh Riverhounds vs FC Tulsa</td><td class="dim">draw,away</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="bad">-49.0c</td></tr>
+<tr><td class="dim">08-07</td><td>CAN</td><td>Forge vs Vancouver FC</td><td class="dim">draw,away</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-49.0c</td></tr>
+<tr><td class="dim">08-01</td><td>HR1</td><td>Istra 1961 vs NK Lokomotiva Zagreb</td><td class="dim">away,draw</td><td class="dim">+11.0c</td><td class="dim">v3</td><td class="bad">-37.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CO1</td><td>Alianza Valledupar vs Deportes Tolima</td><td class="dim">away,draw</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-35.0c</td></tr>
+<tr><td class="dim">07-26</td><td>BR2</td><td>America Mineiro vs Goias</td><td class="dim">home,draw</td><td class="dim">+4.0c</td><td class="dim">v1</td><td class="bad">-34.0c</td></tr>
+<tr><td class="dim">08-02</td><td>AR1</td><td>Deportivo Riestra vs Barracas Central</td><td class="dim">home,away</td><td class="dim">+7.0c</td><td class="dim">v3</td><td class="bad">-33.0c</td></tr>
+<tr><td class="dim">08-02</td><td>HR1</td><td>NK Varazdin vs HNK Hajduk Split</td><td class="dim">away,home</td><td class="dim">-1.0c</td><td class="dim">v3</td><td class="bad">-32.0c</td></tr>
+<tr><td class="dim">07-30</td><td>AR1</td><td>Central Cordoba de Santiago vs Atletico Tucuman</td><td class="dim">away,home</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-31.0c</td></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>Gremio vs Fluminense</td><td class="dim">draw,away</td><td class="dim">+5.0c</td><td class="dim">v1</td><td class="bad">-30.0c</td></tr>
+<tr><td class="dim">08-02</td><td>AR1</td><td>Lanus vs Instituto Cordoba</td><td class="dim">away,home</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="bad">-30.0c</td></tr>
+<tr><td class="dim">08-03</td><td>AR1</td><td>Velez Sarsfield vs Independiente</td><td class="dim">home,away</td><td class="dim">+7.0c</td><td class="dim">v3</td><td class="bad">-30.0c</td></tr>
+<tr><td class="dim">08-01</td><td>HR1</td><td>HNK Gorica vs NK Osijek</td><td class="dim">away,home</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-29.0c</td></tr>
+<tr><td class="dim">08-02</td><td>AR1</td><td>River Plate vs Rosario Central</td><td class="dim">away,home</td><td class="dim">+7.0c</td><td class="dim">v3</td><td class="bad">-29.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CO1</td><td>Junior vs Millonarios</td><td class="dim">away,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="bad">-28.0c</td></tr>
+<tr><td class="dim">08-01</td><td>USL</td><td>Oakland Roots vs Pittsburgh Riverhounds</td><td class="dim">home,away</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-28.0c</td></tr>
+<tr><td class="dim">08-08</td><td>KO1</td><td>Jeonbuk Motors vs Jeju United FC</td><td class="dim">home,away</td><td class="dim">+5.0c</td><td class="dim">v3</td><td class="bad">-27.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CH1</td><td>FC Thun vs BSC Young Boys</td><td class="dim">away,home</td><td class="dim">+2.0c</td><td class="dim">v3</td><td class="bad">-27.0c</td></tr>
+<tr><td class="dim">08-07</td><td>KO1</td><td>FC Anyang vs Daejeon Citizen</td><td class="dim">away,home</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-27.0c</td></tr>
+<tr><td class="dim">08-01</td><td>NWSL</td><td>Kansas City W vs Angel City W</td><td class="dim">home,draw</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-27.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CO1</td><td>Internacional de Bogota vs America de Cali</td><td class="dim">home,away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-26.0c</td></tr>
+<tr><td class="dim">08-07</td><td>NWSL</td><td>NJ/NY Gotham FC W vs San Diego Wave W</td><td class="dim">home,draw</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-26.0c</td></tr>
+<tr><td class="dim">07-29</td><td>BSA</td><td>Vitoria vs Palmeiras</td><td class="dim">draw,away</td><td class="dim">+0.0c</td><td class="dim">v3</td><td class="bad">-25.7c</td></tr>
+<tr><td class="dim">08-02</td><td>PL1</td><td>Slask Wroclaw vs Raków Częstochowa</td><td class="dim">home,away</td><td class="dim">+9.0c</td><td class="dim">v3</td><td class="bad">-25.0c</td></tr>
+<tr><td class="dim">07-31</td><td>PL1</td><td>Motor Lublin vs Jagiellonia</td><td class="dim">home,away</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-24.0c</td></tr>
+<tr><td class="dim">08-02</td><td>KO1</td><td>Ulsan Hyundai FC vs FC Anyang</td><td class="dim">home,away</td><td class="dim">+9.0c</td><td class="dim">v3</td><td class="bad">-23.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CAN</td><td>Vancouver FC vs Atlético Ottawa</td><td class="dim">home,draw</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-23.0c</td></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>Palmeiras vs Atletico-MG</td><td class="dim">away,home</td><td class="dim">+5.0c</td><td class="dim">v1</td><td class="bad">-23.0c</td></tr>
+<tr><td class="dim">07-26</td><td>MX1</td><td>Necaxa vs Monterrey</td><td class="dim">home,away</td><td class="dim">+6.0c</td><td class="dim">v1</td><td class="bad">-22.0c</td></tr>
+<tr><td class="dim">08-05</td><td>AR1</td><td>Boca Juniors vs Estudiantes L.P.</td><td class="dim">home,draw</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="bad">-22.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NWSL</td><td>San Diego Wave W vs Seattle Reign FC W</td><td class="dim">home,away</td><td class="dim">+4.0c</td><td class="dim">v1</td><td class="bad">-21.0c</td></tr>
+<tr><td class="dim">08-07</td><td>NWSL</td><td>Orlando Pride W vs Racing Louisville W</td><td class="dim">away,home</td><td class="dim">+7.0c</td><td class="dim">v3</td><td class="bad">-21.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CZ1</td><td>Baník Ostrava vs Slavia Praha</td><td class="dim">home,away</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-21.0c</td></tr>
+<tr><td class="dim">07-26</td><td>SE1</td><td>Malmo FF vs IF Elfsborg</td><td class="dim">home,away</td><td class="dim">+6.0c</td><td class="dim">v1</td><td class="bad">-21.0c</td></tr>
+<tr><td class="dim">07-29</td><td>NWSL</td><td>Bay FC W vs NJ/NY Gotham FC W</td><td class="dim">home,away</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="bad">-20.0c</td></tr>
+<tr><td class="dim">07-26</td><td>MX1</td><td>CF Pachuca vs Club Queretaro</td><td class="dim">away,home</td><td class="dim">+4.0c</td><td class="dim">v1</td><td class="bad">-20.0c</td></tr>
+<tr><td class="dim">07-30</td><td>AR1</td><td>Independiente vs Newells Old Boys</td><td class="dim">draw,home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="bad">-19.3c</td></tr>
+<tr><td class="dim">07-26</td><td>CN1</td><td>Shandong Luneng vs Henan Jianye</td><td class="dim">away,home</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-19.0c</td></tr>
+<tr><td class="dim">08-02</td><td>NO1</td><td>Molde vs Sarpsborg 08 FF</td><td class="dim">draw,home</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="bad">-18.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CN1</td><td>Shenyang Urban vs Shanghai Shenhua</td><td class="dim">home,away</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-18.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NWSL</td><td>Angel City W vs Racing Louisville W</td><td class="dim">away,home</td><td class="dim">+5.0c</td><td class="dim">v1</td><td class="bad">-18.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CAN</td><td>York United vs Forge</td><td class="dim">away,draw</td><td class="dim">+6.0c</td><td class="dim">v1</td><td class="bad">-17.0c</td></tr>
+<tr><td class="dim">07-29</td><td>BSA</td><td>Fluminense vs Bahia</td><td class="dim">home,draw</td><td class="dim">+5.0c</td><td class="dim">v3</td><td class="bad">-17.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CN1</td><td>Qingdao Jonoon vs Shanghai Shenhua</td><td class="dim">draw,away</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-15.0c</td></tr>
+<tr><td class="dim">08-07</td><td>CN1</td><td>Beijing Guoan vs Sichuan Jiuniu</td><td class="dim">draw,home</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="bad">-13.0c</td></tr>
+<tr><td class="dim">08-03</td><td>CO1</td><td>Bucaramanga vs Cucuta</td><td class="dim">home,draw</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-13.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CN1</td><td>Qingdao Youth Island vs Qingdao Jonoon</td><td class="dim">away,draw</td><td class="dim">+11.0c</td><td class="dim">v3</td><td class="good">+52.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CAN</td><td>Atlético Ottawa vs HFX Wanderers FC</td><td class="dim">draw,away</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="good">+57.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CO1</td><td>Independiente Medellin vs Deportivo Cali</td><td class="dim">away,draw</td><td class="dim">+9.0c</td><td class="dim">v3</td><td class="good">+57.0c</td></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>Remo vs Vitoria</td><td class="dim">away,draw</td><td class="dim">+6.0c</td><td class="dim">v1</td><td class="good">+59.0c</td></tr>
+<tr><td class="dim">08-05</td><td>AR1</td><td>Tigre vs Belgrano Cordoba</td><td class="dim">away,home</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="good">+66.0c</td></tr>
+<tr><td class="dim">08-02</td><td>KO1</td><td>Jeju United FC vs Incheon United</td><td class="dim">away,home</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="good">+69.0c</td></tr>
+<tr><td class="dim">07-31</td><td>PL1</td><td>Wisla Plock vs Widzew Łódź</td><td class="dim">home,away</td><td class="dim">+9.0c</td><td class="dim">v3</td><td class="good">+70.0c</td></tr>
+<tr><td class="dim">08-02</td><td>NWSL</td><td>Washington Spirit W vs San Diego Wave W</td><td class="dim">home,draw</td><td class="dim">+10.0c</td><td class="dim">v3</td><td class="good">+72.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CH1</td><td>FC Zurich vs Servette FC</td><td class="dim">away,draw</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="good">+74.0c</td></tr>
+<tr><td class="dim">08-08</td><td>JP1</td><td>Nagoya Grampus vs Shimizu S-pulse</td><td class="dim">draw,home</td><td class="dim">+6.0c</td><td class="dim">v3</td><td class="good">+74.0c</td></tr>
+<tr><td class="dim">08-08</td><td>KO1</td><td>Gimcheon Sangmu FC vs FC Seoul</td><td class="dim">away,home</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="good">+76.0c</td></tr>
+<tr><td class="dim">07-31</td><td>NO1</td><td>Valerenga vs Ham-Kam</td><td class="dim">draw,home</td><td class="dim">+5.0c</td><td class="dim">v3</td><td class="good">+82.0c</td></tr>
+</table></div></details>
+<details class="sub"><summary>1 of 3 <span class="count">(52 books)</span></summary>
+<div class="card"><table>
+<tr><th>Date</th><th>Lg</th><th>Match</th><th>Legs filled</th><th>Gross @post</th><th>Regime</th><th>P&amp;L</th></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>Cruzeiro vs Botafogo</td><td class="dim">away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-77.0c</td></tr>
+<tr><td class="dim">08-01</td><td>PE1</td><td>Atletico Grau vs Sport Boys</td><td class="dim">away</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="bad">-71.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MX1</td><td>Club Queretaro vs Tigres UANL</td><td class="dim">home</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="bad">-68.0c</td></tr>
+<tr><td class="dim">08-01</td><td>SC0</td><td>Aberdeen vs Heart Of Midlothian</td><td class="dim">home</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="bad">-67.0c</td></tr>
+<tr><td class="dim">08-02</td><td>USL</td><td>New Mexico United vs Colorado Springs</td><td class="dim">home</td><td class="dim">+4.0c</td><td class="dim">v3</td><td class="bad">-66.0c</td></tr>
+<tr><td class="dim">08-07</td><td>KO1</td><td>Pohang Steelers vs Ulsan Hyundai FC</td><td class="dim">away</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="bad">-62.0c</td></tr>
+<tr><td class="dim">08-07</td><td>PE1</td><td>Comerciantes Unidos vs Cusco</td><td class="dim">home</td><td class="dim">+3.0c</td><td class="dim">v3</td><td class="bad">-62.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CL1</td><td>Concepción vs O'Higgins</td><td class="dim">home</td><td class="dim">+4.0c</td><td class="dim">v1</td><td class="bad">-58.0c</td></tr>
+<tr><td class="dim">07-29</td><td>AR1</td><td>Barracas Central vs Aldosivi</td><td class="dim">home</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-58.0c</td></tr>
+<tr><td class="dim">07-31</td><td>CN1</td><td>Tianjin Teda vs Yunnan Yukun</td><td class="dim">home</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="bad">-56.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NO1</td><td>KFUM Oslo vs Molde</td><td class="dim">away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-55.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CL1</td><td>A. Italiano vs Universidad de Chile</td><td class="dim">away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-53.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CN1</td><td>Yunnan Yukun vs Sichuan Jiuniu</td><td class="dim">home</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="bad">-43.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CAN</td><td>Atlético Ottawa vs Pacific FC</td><td class="dim">home</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="bad">-39.0c</td></tr>
+<tr><td class="dim">08-02</td><td>DK1</td><td>Silkeborg vs FC Copenhagen</td><td class="dim">away</td><td class="dim">+10.0c</td><td class="dim">v3</td><td class="bad">-39.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CN1</td><td>Dalian Zhixing vs Shenyang Urban</td><td class="dim">home</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="bad">-38.0c</td></tr>
+<tr><td class="dim">08-01</td><td>NWSL</td><td>Houston Dash W vs NJ/NY Gotham FC W</td><td class="dim">away</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-38.0c</td></tr>
+<tr><td class="dim">07-26</td><td>DK1</td><td>Sonderjyske vs FC Midtjylland</td><td class="dim">away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-37.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CL1</td><td>Universidad de Chile vs Huachipato</td><td class="dim">home</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="bad">-34.0c</td></tr>
+<tr><td class="dim">07-26</td><td>SE1</td><td>Sirius vs IFK Goteborg</td><td class="dim">home</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="bad">-33.0c</td></tr>
+<tr><td class="dim">08-02</td><td>PE1</td><td>Alianza Lima vs Alianza Atletico</td><td class="dim">home</td><td class="dim">+1.0c</td><td class="dim">v3</td><td class="bad">-32.0c</td></tr>
+<tr><td class="dim">08-08</td><td>JP1</td><td>Sanfrecce Hiroshima vs JEF United Chiba</td><td class="dim">home</td><td class="dim">+12.0c</td><td class="dim">v3</td><td class="bad">-32.0c</td></tr>
+<tr><td class="dim">08-01</td><td>USL</td><td>Charleston Battery vs Brooklyn</td><td class="dim">home</td><td class="dim">+12.0c</td><td class="dim">v3</td><td class="bad">-30.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NO1</td><td>Sandefjord vs Bodo/Glimt</td><td class="dim">away</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="bad">-26.0c</td></tr>
+<tr><td class="dim">07-31</td><td>NO1</td><td>Bodo/Glimt vs Lillestrom</td><td class="dim">home</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="bad">-20.0c</td></tr>
+<tr><td class="dim">08-07</td><td>B1</td><td>Club Brugge KV vs Kortrijk</td><td class="dim">home</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="bad">-18.0c</td></tr>
+<tr><td class="dim">07-29</td><td>BSA</td><td>Mirassol vs Remo</td><td class="dim">away</td><td class="dim">+12.0c</td><td class="dim">v3</td><td class="good">+19.0c</td></tr>
+<tr><td class="dim">08-01</td><td>NWSL</td><td>Racing Louisville W vs Chicago Red Stars W</td><td class="dim">away</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="good">+23.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CZ1</td><td>Sigma Olomouc vs Mlada Boleslav</td><td class="dim">away</td><td class="dim">+11.0c</td><td class="dim">v3</td><td class="good">+24.0c</td></tr>
+<tr><td class="dim">07-26</td><td>KO1</td><td>Gwangju FC vs Jeju United FC</td><td class="dim">home</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="good">+25.0c</td></tr>
+<tr><td class="dim">08-01</td><td>NO1</td><td>Fredrikstad vs Sandefjord</td><td class="dim">draw</td><td class="dim">+10.0c</td><td class="dim">v3</td><td class="good">+28.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CL1</td><td>Everton de Vina vs Colo Colo</td><td class="dim">home</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="good">+29.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CN1</td><td>Hangzhou Greentown vs Dalian Zhixing</td><td class="dim">away</td><td class="dim">+9.0c</td><td class="dim">v1</td><td class="good">+31.0c</td></tr>
+<tr><td class="dim">08-05</td><td>USL</td><td>Las Vegas Lights vs Oakland Roots</td><td class="dim">away</td><td class="dim">+12.0c</td><td class="dim">v3</td><td class="good">+34.0c</td></tr>
+<tr><td class="dim">08-02</td><td>CN1</td><td>Sichuan Jiuniu vs Chongqing Tongliang Long</td><td class="dim">away</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="good">+35.0c</td></tr>
+<tr><td class="dim">08-08</td><td>SE1</td><td>Orgryte IS vs AIK Stockholm</td><td class="dim">home</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="good">+36.0c</td></tr>
+<tr><td class="dim">08-08</td><td>SC0</td><td>Dundee vs Aberdeen</td><td class="dim">away</td><td class="dim">+11.0c</td><td class="dim">v3</td><td class="good">+38.0c</td></tr>
+<tr><td class="dim">08-08</td><td>NWSL</td><td>Denver Summit W vs Utah Royals W</td><td class="dim">away</td><td class="dim">+11.0c</td><td class="dim">v3</td><td class="good">+39.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CL1</td><td>Palestino vs Coquimbo Unido</td><td class="dim">away</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="good">+40.0c</td></tr>
+<tr><td class="dim">08-08</td><td>D2</td><td>Karlsruher SC vs Arminia Bielefeld</td><td class="dim">away</td><td class="dim">+5.0c</td><td class="dim">v3</td><td class="good">+40.0c</td></tr>
+<tr><td class="dim">07-26</td><td>PE1</td><td>Comerciantes Unidos vs Alianza Lima</td><td class="dim">away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="good">+45.0c</td></tr>
+<tr><td class="dim">08-02</td><td>SC0</td><td>Hibernian vs Motherwell</td><td class="dim">home</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="good">+46.0c</td></tr>
+<tr><td class="dim">08-02</td><td>AR1</td><td>Newells Old Boys vs Boca Juniors</td><td class="dim">away</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="good">+50.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CH1</td><td>FC Basel 1893 vs Lausanne</td><td class="dim">home</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="good">+52.0c</td></tr>
+<tr><td class="dim">08-08</td><td>KO1</td><td>Bucheon FC 1995 vs Gwangju FC</td><td class="dim">home</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="good">+53.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>Vancouver Whitecaps vs Los Angeles FC</td><td class="dim">home</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="good">+54.0c</td></tr>
+<tr><td class="dim">07-26</td><td>KO1</td><td>FC Seoul vs Ulsan Hyundai FC</td><td class="dim">home</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="good">+55.0c</td></tr>
+<tr><td class="dim">08-08</td><td>AR1</td><td>Boca Juniors vs Velez Sarsfield</td><td class="dim">home</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="good">+56.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CH1</td><td>Lausanne vs BSC Young Boys</td><td class="dim">away</td><td class="dim">+8.0c</td><td class="dim">v3</td><td class="good">+56.0c</td></tr>
+<tr><td class="dim">07-26</td><td>KO1</td><td>Incheon United vs Bucheon FC 1995</td><td class="dim">home</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="good">+58.0c</td></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>RB Bragantino vs Coritiba</td><td class="dim">home</td><td class="dim">+6.0c</td><td class="dim">v1</td><td class="good">+60.0c</td></tr>
+<tr><td class="dim">07-26</td><td>SE1</td><td>IF Brommapojkarna vs Hammarby FF</td><td class="dim">away</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="good">+68.0c</td></tr>
+</table></div></details>
+<details class="sub"><summary>none filled <span class="count">(43 books)</span></summary>
+<div class="card"><table>
+<tr><th>Date</th><th>Lg</th><th>Match</th><th>Legs filled</th><th>Gross @post</th><th>Regime</th><th>P&amp;L</th></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>Philadelphia Union vs Atlanta United FC</td><td class="dim">—</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>JP1</td><td>Cerezo Osaka vs Fagiano Okayama</td><td class="dim">—</td><td class="dim">+11.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>DC United vs Nashville SC</td><td class="dim">—</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-02</td><td>SE1</td><td>AIK Stockholm vs Orgryte IS</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>USL</td><td>Loudoun United vs Charleston Battery</td><td class="dim">—</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>AR1</td><td>Estudiantes L.P. vs Defensa Y Justicia</td><td class="dim">—</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-02</td><td>USL</td><td>Orange County SC vs El Paso Locomotive</td><td class="dim">—</td><td class="dim">+9.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>CN1</td><td>Chengdu Better City vs Beijing Guoan</td><td class="dim">—</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>Inter Miami vs Columbus Crew</td><td class="dim">—</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-02</td><td>SE1</td><td>IF Brommapojkarna vs Malmo FF</td><td class="dim">—</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-31</td><td>USL</td><td>San Antonio vs Indy Eleven</td><td class="dim">—</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-02</td><td>DK1</td><td>FC Nordsjaelland vs Randers FC</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>USL</td><td>Pittsburgh Riverhounds vs Sacramento Republic</td><td class="dim">—</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>PE1</td><td>FC Cajamarca vs Sport Huancayo</td><td class="dim">—</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NO1</td><td>Sarpsborg 08 FF vs Ham-Kam</td><td class="dim">—</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>USL</td><td>Lexington vs Monterey Bay</td><td class="dim">—</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-03</td><td>PL1</td><td>Cracovia Krakow vs Pogon Szczecin</td><td class="dim">—</td><td class="dim">+18.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-02</td><td>SE1</td><td>IFK Goteborg vs Degerfors IF</td><td class="dim">—</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CL1</td><td>Cobresal vs Union La Calera</td><td class="dim">—</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>BSA</td><td>Bahia vs Corinthians</td><td class="dim">—</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CZ1</td><td>Mlada Boleslav vs Sparta Praha</td><td class="dim">—</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CAN</td><td>Supra du Quebec vs Cavalry FC</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>AR1</td><td>Estudiantes de Rio Cuarto vs Banfield</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NO1</td><td>Brann vs Valerenga</td><td class="dim">—</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>CO1</td><td>Deportivo Pasto vs Águilas Doradas</td><td class="dim">—</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>P1</td><td>Guimaraes vs Arouca</td><td class="dim">—</td><td class="dim">+14.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>NO1</td><td>Start vs Viking</td><td class="dim">—</td><td class="dim">+15.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MX1</td><td>Leon vs CF Pachuca</td><td class="dim">—</td><td class="dim">+18.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>PL1</td><td>Pogon Szczecin vs Motor Lublin</td><td class="dim">—</td><td class="dim">+17.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>PL1</td><td>Korona Kielce vs Legia Warszawa</td><td class="dim">—</td><td class="dim">+18.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>AR1</td><td>Racing Club vs Tigre</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>PL1</td><td>Widzew Łódź vs Motor Lublin</td><td class="dim">—</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>FC Cincinnati vs San Jose Earthquakes</td><td class="dim">—</td><td class="dim">+12.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>NO1</td><td>Aalesund vs Viking</td><td class="dim">—</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>AR1</td><td>Estudiantes L.P. vs Independiente</td><td class="dim">—</td><td class="dim">+7.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-02</td><td>NO1</td><td>Brann vs Rosenborg</td><td class="dim">—</td><td class="dim">+18.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>CN1</td><td>Yunnan Yukun vs Chengdu Better City</td><td class="dim">—</td><td class="dim">+18.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-07</td><td>AR1</td><td>Rosario Central vs Aldosivi</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-08</td><td>PL1</td><td>Radomiak Radom vs Gornik Zabrze</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>USL</td><td>Loudoun United vs Hartford Athletic</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-05</td><td>USL</td><td>El Paso Locomotive vs Monterey Bay</td><td class="dim">—</td><td class="dim">+13.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">07-26</td><td>PL1</td><td>Raków Częstochowa vs Wisla Plock</td><td class="dim">—</td><td class="dim">+8.0c</td><td class="dim">v1</td><td class="dim">+0.0c</td></tr>
+<tr><td class="dim">08-01</td><td>MLS</td><td>New York Red Bulls vs Orlando City SC</td><td class="dim">—</td><td class="dim">+16.0c</td><td class="dim">v3</td><td class="dim">+0.0c</td></tr>
+</table></div></details>
 <div class="note">completion rate <b>36%</b> · net -446c across all books · liquidity gate: min leg volume &ge; 500</div>
 <div class="note">A <b>complete</b> book earns the overround and is outcome-independent; a <b>stranded</b> one is a naked position on whichever side the market is moving toward — which is why 2-of-3 is the worst state, not 1-of-3. The gate quotes only books liquid enough to finish: on this history, min leg volume &ge;500 lifted completion 36% &rarr; 60% and turned &minus;1.84c/book into +3.01c. That threshold was chosen on this same data, so it is <b>in-sample</b> — it is frozen from 2026-08-09 to be judged on fresh books only.</div>
 </details>
