@@ -113,7 +113,7 @@ tr.hidden{display:none}
 </head><body>
 <div class="topbar"><div>
 <h1>Soccer xlow tracker</h1>
-<div class="sub">snapshot 2026-08-09 15:05 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
+<div class="sub">snapshot 2026-08-09 15:13 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
 </div><div class="tools">
 <input class="filter" id="filterBox" type="search" placeholder="Filter league / team…" aria-label="Filter rows">
 <button class="tool" id="expandBtn">Collapse all</button>
@@ -466,6 +466,7 @@ tr.hidden{display:none}
 <tr><td class="dim">08-05</td><td>USL</td><td>El Paso Locomotive vs Monterey Bay</td><td class="dim">—</td><td><span class="dim">0</span></td><td class="dim opt2">+13.0c</td><td class="dim opt">v3</td><td class="dim">+0.0c</td></tr>
 </table></div></details>
 <div class="note">completion rate <b>36%</b> · net -446c across all books · liquidity gate: min leg volume &ge; 500</div>
+<div class="note" style="border-left:3px solid var(--warn);padding-left:9px"><b>These are CEILING numbers, not results.</b> Fills here come from mm_settle, which counts any trade printed at or above our ask as ours &mdash; it ignores queue position, and its own docstring calls it a ceiling. The live quoter uses a stricter queue-aware test, and the two disagree: the settler scores 59 books as 2-of-3 while the quoter took no action on 39 of them, because it never believed two legs had sold. Completion rates and the P&amp;L split above are therefore upper bounds. The live view is now being archived to <code>mm_live_fills.csv</code> so the gap can be measured rather than guessed at.</div>
 <details class="sub"><summary>Why the gate is at 500 <span class="count">(threshold sweep)</span></summary>
 <div class="card"><table>
 <tr><th>Min leg volume</th><th>Books kept</th><th class="opt2">Completed</th><th>Completion rate</th><th>Total</th><th>Per book</th></tr>
