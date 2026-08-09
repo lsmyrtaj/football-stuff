@@ -1,37 +1,80 @@
 <style>
+/* Dark is the default surface (this page has always been dark and is read at
+   night); light is a SELECTED alternate with its own steps, not an auto-inverted
+   copy -- flipping a dark palette produces muddy status colours. Both themes
+   keep the same semantic tokens so nothing downstream needs to know which is on. */
 :root{--bg:#12131a;--card:#1b1d26;--line:#2c2f3d;--ink:#e8e9ee;--dim:#9aa0b4;
---good:#4ec27f;--bad:#e56b6b;--warn:#e0a94a;--acc:#5b9dd9}
+--good:#4ec27f;--bad:#e56b6b;--warn:#e0a94a;--acc:#5b9dd9;--hover:#232635}
+:root[data-theme="light"]{--bg:#f6f7f9;--card:#ffffff;--line:#e2e5ea;--ink:#1a1c22;
+--dim:#63697a;--good:#1a7f37;--bad:#c1272d;--warn:#9a6700;--acc:#2f6fb0;--hover:#f0f2f6}
 *{box-sizing:border-box}
 body{margin:0;padding:18px;background:var(--bg);color:var(--ink);
-font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif}
+font:14px/1.5 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+-webkit-text-size-adjust:100%}
 h1{font-size:19px;margin:0 0 2px}
-h2{font-size:15px;margin:26px 0 8px;color:var(--ink);font-weight:600}
 .sub{color:var(--dim);font-size:12px;margin-bottom:14px}
+.topbar{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.tools{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+button.tool{background:var(--card);color:var(--dim);border:1px solid var(--line);
+border-radius:7px;padding:6px 10px;font:inherit;font-size:12px;cursor:pointer}
+button.tool:hover{background:var(--hover);color:var(--ink)}
+input.filter{background:var(--card);color:var(--ink);border:1px solid var(--line);
+border-radius:7px;padding:6px 10px;font:inherit;font-size:12px;min-width:150px}
+input.filter::placeholder{color:var(--dim)}
 .kpis{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px}
 .kpi{background:var(--card);border:1px solid var(--line);border-radius:9px;
 padding:11px 14px;min-width:126px;flex:1}
 .kpi .lbl{color:var(--dim);font-size:11px;text-transform:uppercase;letter-spacing:.04em}
 .kpi .val{font-size:19px;font-weight:600;margin-top:3px}
+/* Sections collapse so a long page can be skimmed. <details>/<summary> is used
+   rather than JS toggling so it still works with scripting disabled. */
+details.sec{margin:22px 0 0}
+details.sec>summary{font-size:15px;font-weight:600;cursor:pointer;list-style:none;
+padding:6px 0;display:flex;align-items:center;gap:8px;color:var(--ink)}
+details.sec>summary::-webkit-details-marker{display:none}
+details.sec>summary::before{content:'\25B8';color:var(--dim);font-size:11px;
+transition:transform .15s;display:inline-block}
+details.sec[open]>summary::before{transform:rotate(90deg)}
+details.sec>summary:hover{color:var(--acc)}
+.count{color:var(--dim);font-weight:400;font-size:13px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:9px;
 overflow-x:auto;margin-bottom:6px}
 table{border-collapse:collapse;width:100%;min-width:520px}
 th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.04em;
 color:var(--dim);font-weight:600;padding:9px 11px;border-bottom:1px solid var(--line);
-white-space:nowrap}
+white-space:nowrap;position:sticky;top:0;background:var(--card);z-index:1}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{color:var(--ink)}
+th.sortable::after{content:'\2195';opacity:.28;margin-left:5px;font-size:10px}
+th.sortable.asc::after{content:'\2191';opacity:.9}
+th.sortable.desc::after{content:'\2193';opacity:.9}
 td{padding:9px 11px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody tr:hover td{background:var(--hover)}
 tr:last-child td{border-bottom:none}
 .good{color:var(--good)}.bad{color:var(--bad)}.warn{color:var(--warn)}.dim{color:var(--dim)}
 .pill{display:inline-block;padding:2px 7px;border-radius:99px;font-size:11px;
 border:1px solid var(--line);color:var(--dim)}
 .pill.k{border-color:#3d5a80;color:#8fb8e0}
 .pill.p{border-color:#4a3d6b;color:#b49ae0}
+:root[data-theme="light"] .pill.k{border-color:#9dbbdc;color:#255d99}
+:root[data-theme="light"] .pill.p{border-color:#bcabdf;color:#5b3fa0}
 .bar{height:6px;background:var(--line);border-radius:99px;overflow:hidden;margin-top:7px}
 .bar>i{display:block;height:100%;background:var(--acc)}
 .note{color:var(--dim);font-size:12px;margin:6px 0 0}
-@media(max-width:640px){body{padding:12px}.kpi{min-width:calc(50% - 5px)}}
+tr.hidden{display:none}
+.empty{color:var(--dim);font-size:12px;padding:10px 11px}
+@media(max-width:640px){body{padding:12px}.kpi{min-width:calc(50% - 5px)}
+.topbar{flex-direction:column}}
+@media print{button.tool,input.filter{display:none}details.sec{display:block}}
 </style>
+<div class="topbar"><div>
 <h1>Soccer xlow tracker</h1>
-<div class="sub">snapshot 2026-08-09 12:10 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
+<div class="sub">snapshot 2026-08-09 12:23 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
+</div><div class="tools">
+<input class="filter" id="filterBox" type="search" placeholder="Filter league / team…" aria-label="Filter rows">
+<button class="tool" id="expandBtn">Collapse all</button>
+<button class="tool" id="themeBtn">Light</button>
+</div></div>
 <div class="kpis">
 <div class="kpi"><div class="lbl">Kalshi cash</div><div class="val"><span class="good">$0.99</span></div></div>
 <div class="kpi"><div class="lbl">Poly-US cash</div><div class="val"><span class="good">$1.17</span></div></div>
@@ -40,7 +83,7 @@ border:1px solid var(--line);color:var(--dim)}
 <div class="kpi"><div class="lbl">WR vs implied</div><div class="val"><span class="good">+1.7%</span></div><div class="lbl">25.2% vs 23.5%</div></div>
 </div>
 <div class="note">checkpoint progress 258/100<div class="bar"><i style="width:100%"></i></div></div>
-<h2>Signals — today &amp; tomorrow (21)</h2><div class="card"><table>
+<details class="sec" open><summary>Signals — today &amp; tomorrow (21)</summary><div class="card"><table>
 <tr><th>Date</th><th>Lg</th><th>Match</th><th>Bet</th><th>Cheap</th><th>CLV K</th><th>CLV P</th><th>Real trade</th><th>Result</th></tr>
 <tr><td class="dim">08-09</td><td>AR1</td><td>Argentinos JRS vs Racing Club</td><td>AWAY YES</td><td class="dim">Kalshi</td><td><span class="good">+5.1%</span></td><td><span class="good">+3.0%</span></td><td><span class="dim">not placed</span></td><td><span class="dim">open</span></td></tr>
 <tr><td class="dim">08-09</td><td>AR1</td><td>Gimnasia L.P. vs Barracas Central</td><td>AWAY YES</td><td class="dim">Poly</td><td><span class="good">+2.9%</span></td><td><span class="good">+5.7%</span></td><td><span class="dim">not placed</span></td><td><span class="dim">open</span></td></tr>
@@ -64,11 +107,13 @@ border:1px solid var(--line);color:var(--dim)}
 <tr><td class="dim">08-09</td><td>SE1</td><td>Hammarby FF vs BK Hacken</td><td>AWAY YES</td><td class="dim">Poly</td><td><span class="dim">-0.0%</span></td><td><span class="good">+5.4%</span></td><td><span class="dim">not placed</span></td><td>H · <span class="bad">$-7.78</span></td></tr>
 <tr><td class="dim">08-09</td><td>USL</td><td>Indy Eleven vs Hartford Athletic <span class="pill">xlow_polyus</span></td><td>AWAY YES</td><td class="dim">Poly</td><td><span class="good">+1.7%</span></td><td><span class="good">+5.8%</span></td><td><span class="dim">not placed</span></td><td><span class="dim">open</span></td></tr>
 </table></div>
-<h2>Open positions (0)</h2><div class="card"><table>
+</details>
+<details class="sec" open><summary>Open positions (0)</summary><div class="card"><table>
 <tr><th>Venue</th><th>Market</th><th>Qty</th><th>Cost</th><th>Value</th><th>Fees</th></tr>
 <tr><td colspan="6" class="dim">none open</td></tr>
 </table></div>
-<h2>Forward test (out-of-sample)</h2><div class="card"><table>
+</details>
+<details class="sec" open><summary>Forward test (out-of-sample)</summary><div class="card"><table>
 <tr><th>Rule</th><th>n</th><th>WR</th><th>Implied</th><th>ROI/bet</th><th>z</th></tr>
 <tr><td>xlow (PRIMARY)</td><td>258</td><td>25.2%</td><td class="dim">23.5%</td><td><span class="good">+0.8%</span></td><td class="dim">+0.67</td></tr>
 <tr><td>xlow_f10</td><td>256</td><td>25.4%</td><td class="dim">23.6%</td><td><span class="good">+1.6%</span></td><td class="dim">+0.70</td></tr>
@@ -78,7 +123,8 @@ border:1px solid var(--line);color:var(--dim)}
 <tr><td>xlow_polyus (USL/PL1)</td><td>47</td><td>38.3%</td><td class="dim">32.9%</td><td><span class="good">+13.7%</span></td><td class="dim">+0.83</td></tr>
 </table></div>
 <div class="note">unique/overlap are diagnostics, not traded: the rule bets "unique" shapes and skips "overlap" ones, so a wide spread between them means the gate is doing real work.</div>
-<h2>Forward by league</h2><div class="card"><table>
+</details>
+<details class="sec" open><summary>Forward by league</summary><div class="card"><table>
 <tr><th>Lg</th><th>n</th><th>WR</th><th>Implied</th><th>ROI/bet</th><th>z</th></tr>
 <tr><td>KO1</td><td>26</td><td>30.8%</td><td class="dim">26.1%</td><td><span class="good">+21.4%</span></td><td class="dim">+0.56</td></tr>
 <tr><td>AR1</td><td>26</td><td>30.8%</td><td class="dim">24.0%</td><td><span class="good">+33.1%</span></td><td class="dim">+0.82</td></tr>
@@ -106,51 +152,74 @@ border:1px solid var(--line);color:var(--dim)}
 </table></div>
 <div class="note">at these sample sizes every cell is within ~1 game of its implied count — league-level reads are noise, not signal.</div>
 <div class="note">* <b>xlow_polyus</b> = the same strict exclusive-low rule with Polymarket-US standing in for Polymarket.com, for leagues that have no Poly.com market at all (USL, PL1). live_monitor trades these and tags them separately so they never mix into the frozen ledger; this row exists so they are measured somewhere rather than nowhere. The n=286 +24.7% backtest used Poly.com as the confirming book — whether Poly-US confirms Pinnacle as well is <b>untested</b>. Instrumentation, not evidence.</div>
-<h2>League wiring &amp; live feeds</h2><div class="card"><table>
-<tr><th>Lg</th><th>Name</th><th>Kalshi</th><th>Poly.com</th><th>Poly-US</th><th>Abbrs</th><th>Live prices (today+tmrw)</th><th>Can fire</th></tr>
-<tr><td>AR1</td><td class="dim">Liga Profesional</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>30/31</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>B1</td><td class="dim">Belgian Pro League</td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td>20/20</td><td><span class="good">pin</span> <span class="good">K</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>BR2</td><td class="dim">Brasileiro Serie B</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>19/19</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>BSA</td><td class="dim">Brazilian Serie A</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>20/20</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>CAN</td><td class="dim">Canadian Prem</td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td>8/8</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>CH1</td><td class="dim">Swiss Super League</td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td>6/12</td><td><span class="good">pin</span> <span class="good">K</span> <span class="dim">P✗</span> <span class="good">PUS</span></td><td><span class="good">xlow_polyus</span></td></tr>
-<tr><td>CL1</td><td class="dim">Chilean Primera</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>16/16</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>CN1</td><td class="dim">Chinese Super League</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>16/16</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>CO1</td><td class="dim">Colombia Primera A</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>20/21</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>CZ1</td><td class="dim">Czech First League</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>12/16</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>D1</td><td class="dim">Bundesliga</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>18/18</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>D2</td><td class="dim">2.Bundesliga</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>18/18</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>DK1</td><td class="dim">Danish Superliga</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>10/12</td><td><span class="good">pin</span> <span class="dim">K✗</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>E0</td><td class="dim">EPL</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>20/20</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>E1</td><td class="dim">Championship</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>24/24</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>E2</td><td class="dim">League One</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>24/24</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>E3</td><td class="dim">League Two</td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>0/23</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>EC</td><td class="dim">Conference</td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>0/21</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>F1</td><td class="dim">Ligue 1</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>19/19</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>F2</td><td class="dim">Ligue 2</td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>0/17</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>G1</td><td class="dim">Greek SL</td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td>14/14</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>HR1</td><td class="dim">Croatia HNL</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>9/10</td><td><span class="good">pin</span> <span class="good">K</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>I1</td><td class="dim">Serie A</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>20/20</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>I2</td><td class="dim">Serie B</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>17/17</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>JP1</td><td class="dim">J1 League</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>20/20</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>KO1</td><td class="dim">K League 1</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>12/12</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>MLS</td><td class="dim">MLS</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>30/30</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>MX1</td><td class="dim">Liga MX</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>18/18</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>N1</td><td class="dim">Eredivisie</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>18/18</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>NO1</td><td class="dim">Eliteserien</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>16/16</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>NWSL</td><td class="dim">NWSL</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>16/16</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>P1</td><td class="dim">Primeira Liga</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>19/19</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>PE1</td><td class="dim">Peru Liga 1</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>17/18</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>PL1</td><td class="dim">Ekstraklasa</td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td>17/18</td><td><span class="good">pin</span> <span class="good">K</span> <span class="dim">P✗</span> <span class="good">PUS</span></td><td><span class="good">xlow_polyus</span></td></tr>
-<tr><td>RO1</td><td class="dim">Romania SuperLiga</td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="bad">0</span></td><td><span class="good">pin</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>SC0</td><td class="dim">Scottish Prem</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>12/12</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>SC1</td><td class="dim">Scottish Champ</td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td>0/12</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>SC2</td><td class="dim">Scottish L1</td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td>0/10</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>SC3</td><td class="dim">Scottish L2</td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td><span class="dim">no</span></td><td>0/7</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="dim">—</span></td></tr>
-<tr><td>SE1</td><td class="dim">Allsvenskan</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>16/16</td><td><span class="good">pin</span> <span class="good">K</span> <span class="good">P</span> <span class="good">PUS</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>SP1</td><td class="dim">La Liga</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td>20/20</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>SP2</td><td class="dim">Segunda</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>22/22</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>T1</td><td class="dim">Super Lig</td><td><span class="good">yes</span></td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td>18/18</td><td><span class="dim">pin✗</span> <span class="dim">K✗</span> <span class="dim">P✗</span> <span class="dim">PUS✗</span></td><td><span class="good">xlow</span></td></tr>
-<tr><td>USL</td><td class="dim">USL Championship</td><td><span class="good">yes</span></td><td><span class="dim">no</span></td><td><span class="good">yes</span></td><td>25/25</td><td><span class="good">pin</span> <span class="good">K</span> <span class="dim">P✗</span> <span class="good">PUS</span></td><td><span class="good">xlow_polyus</span></td></tr>
-</table></div>
-<div class="note">"Can fire" = has the two books the rule needs. Abbrs = teams with a Kalshi abbreviation / total mapped; a low ratio silently blocks Kalshi pricing for that league.</div>
+</details>
+<script>
+(function(){
+  // Theme: honour the OS preference, remember an explicit choice.
+  var root=document.documentElement, KEY='xlow-theme';
+  var saved=null; try{saved=localStorage.getItem(KEY);}catch(e){}
+  var dark=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)').matches;
+  root.setAttribute('data-theme', saved || (dark===false?'light':'dark'));
+  var tbtn=document.getElementById('themeBtn');
+  function label(){ tbtn.textContent = root.getAttribute('data-theme')==='light'?'Dark':'Light'; }
+  if(tbtn){ label(); tbtn.onclick=function(){
+    root.setAttribute('data-theme', root.getAttribute('data-theme')==='light'?'dark':'light');
+    try{localStorage.setItem(KEY, root.getAttribute('data-theme'));}catch(e){}
+    label(); }; }
+
+  // Sort. Numeric where the whole column parses as a number (after stripping
+  // %,$,+,commas) so "-14.7%" and "$1,797.89" sort as magnitudes, not strings.
+  function val(td){
+    var t=(td.textContent||'').trim();
+    var n=parseFloat(t.replace(/[$,%+\s]/g,'').replace(/^\((.*)\)$/,'-$1'));
+    return isNaN(n)?null:n;
+  }
+  document.querySelectorAll('table').forEach(function(tb){
+    var head=tb.tHead||tb.rows[0]&&tb.rows[0].parentNode;
+    var hr=tb.querySelector('tr'); if(!hr) return;
+    var body=tb.tBodies[0]||tb;
+    Array.prototype.forEach.call(hr.cells,function(th,i){
+      if(th.tagName!=='TH') return;
+      th.classList.add('sortable');
+      th.onclick=function(){
+        var rows=Array.prototype.filter.call(body.rows,function(r){
+          return r!==hr && r.cells.length===hr.cells.length; });
+        if(!rows.length) return;
+        var dir = th.classList.contains('asc')?-1:1;
+        Array.prototype.forEach.call(hr.cells,function(o){o.classList.remove('asc','desc');});
+        th.classList.add(dir===1?'asc':'desc');
+        rows.sort(function(a,b){
+          var x=val(a.cells[i]), y=val(b.cells[i]);
+          if(x!==null&&y!==null) return (x-y)*dir;
+          return (a.cells[i].textContent.trim()).localeCompare(b.cells[i].textContent.trim())*dir;
+        });
+        rows.forEach(function(r){ body.appendChild(r); });
+      };
+    });
+  });
+
+  // Filter: hides non-matching rows across every table at once, so typing a
+  // league code or team narrows the whole page rather than one section.
+  var f=document.getElementById('filterBox');
+  if(f){ f.oninput=function(){
+    var q=f.value.toLowerCase().trim();
+    document.querySelectorAll('table').forEach(function(tb){
+      var hr=tb.querySelector('tr');
+      Array.prototype.forEach.call(tb.rows,function(r){
+        if(r===hr) return;
+        if(r.cells.length===1){ return; }   // keep spanning note rows
+        r.classList.toggle('hidden', !!q && r.textContent.toLowerCase().indexOf(q)<0);
+      });
+    });
+    if(q) document.querySelectorAll('details.sec').forEach(function(d){d.open=true;});
+  }; }
+
+  var eb=document.getElementById('expandBtn');
+  if(eb){ eb.onclick=function(){
+    var any=Array.prototype.some.call(document.querySelectorAll('details.sec'),
+      function(d){return !d.open;});
+    document.querySelectorAll('details.sec').forEach(function(d){d.open=any;});
+    eb.textContent = any?'Collapse all':'Expand all';
+  }; }
+})();
+</script>
