@@ -113,7 +113,7 @@ tr.hidden{display:none}
 </head><body>
 <div class="topbar"><div>
 <h1>Soccer xlow tracker</h1>
-<div class="sub">snapshot 2026-08-10 07:05 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
+<div class="sub">snapshot 2026-08-10 08:05 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
 </div><div class="tools">
 <input class="filter" id="filterBox" type="search" placeholder="Filter league / team…" aria-label="Filter rows">
 <button class="tool" id="expandBtn">Collapse all</button>
@@ -127,9 +127,10 @@ tr.hidden{display:none}
 <div class="kpi"><div class="lbl">WR vs implied</div><div class="val"><span class="good">+0.7%</span></div><div class="lbl">24.2% vs 23.5%</div></div>
 </div>
 <div class="note">checkpoint progress 277/100<div class="bar"><i style="width:100%"></i></div></div>
-<details class="sec" open><summary>Signals — today &amp; tomorrow (6)</summary><div class="card"><table>
+<details class="sec" open><summary>Signals — today &amp; tomorrow (7)</summary><div class="card"><table>
 <tr><th>Date</th><th>Lg</th><th>Match</th><th>Bet</th><th class="opt2">Cheap</th><th>Ask K</th><th>Ask P</th><th class="opt">Fair</th><th class="opt2">CLV K</th><th class="opt2">CLV P</th><th class="opt">Real trade</th><th>Result</th></tr>
 <tr><td class="dim">08-10</td><td>AR1</td><td>Banfield vs Belgrano Cordoba</td><td>HOME YES</td><td class="dim opt2">Kalshi</td><td><b>0.28</b></td><td><span class="dim">—</span></td><td class="dim opt">0.294</td><td class="opt2"><span class="good">+6.3%</span></td><td class="opt2"><span class="good">+2.9%</span></td><td class="opt"><span class="dim">n/a</span></td><td data-sort=""><span class="dim">open</span></td></tr>
+<tr><td class="dim">08-10</td><td>BR2</td><td>Goias vs Londrina</td><td>AWAY YES</td><td class="dim opt2">Poly</td><td><span class="dim">0.19</span></td><td><b>0.18</b></td><td class="dim opt">0.190</td><td class="opt2"><span class="good">+2.5%</span></td><td class="opt2"><span class="good">+7.8%</span></td><td class="opt"><span class="dim">n/a</span></td><td data-sort=""><span class="dim">open</span></td></tr>
 <tr><td class="dim">08-10</td><td>CL1</td><td>A. Italiano vs Nublense</td><td>AWAY YES</td><td class="dim opt2">Kalshi</td><td><b>0.31</b></td><td><span class="dim">—</span></td><td class="dim opt">0.318</td><td class="opt2"><span class="good">+5.5%</span></td><td class="opt2"><span class="good">+0.8%</span></td><td class="opt"><span class="dim">n/a</span></td><td data-sort=""><span class="dim">open</span></td></tr>
 <tr><td class="dim">08-10</td><td>CO1</td><td>Independiente Medellin vs Millonarios</td><td>AWAY YES</td><td class="dim opt2">Kalshi</td><td><b>0.32</b></td><td><span class="dim">—</span></td><td class="dim opt">0.334</td><td class="opt2"><span class="good">+5.7%</span></td><td class="opt2"><span class="good">+1.2%</span></td><td class="opt"><span class="dim">n/a</span></td><td data-sort=""><span class="dim">open</span></td></tr>
 <tr><td class="dim">08-10</td><td>CO1</td><td>Águilas Doradas vs Llaneros</td><td>AWAY YES</td><td class="dim opt2">Kalshi</td><td><b>0.22</b></td><td><span class="dim">—</span></td><td class="dim opt">0.226</td><td class="opt2"><span class="good">+7.2%</span></td><td class="opt2"><span class="good">+2.8%</span></td><td class="opt"><span class="dim">n/a</span></td><td data-sort=""><span class="dim">open</span></td></tr>
@@ -458,19 +459,20 @@ tr.hidden{display:none}
 <tr><td class="dim">07-26</td><td>NWSL</td><td>Washington Spirit W vs Denver Summit W</td><td class="good">3/3</td><td class="dim opt">away,draw,home</td><td><span class="dim">—</span></td><td class="dim opt2">+2.0c</td><td class="dim opt">v1</td><td class="good">+0.9c</td></tr>
 </table></div></details>
 <div class="note" style="border-left:3px solid var(--warn);padding-left:9px"><b>These are CEILING numbers, not results.</b> Fills here come from mm_settle, which counts any trade printed at or above our ask as ours &mdash; it ignores queue position, and its own docstring calls it a ceiling. The live quoter uses a stricter queue-aware test, and the two disagree: the settler scores 59 books as 2-of-3 while the quoter took no action on 39 of them, because it never believed two legs had sold. Completion rates and the P&amp;L split above are therefore upper bounds. The live view is now being archived to <code>mm_live_fills.csv</code> so the gap can be measured rather than guessed at.</div>
-<details class="sub" open><summary>Liquidity gate &mdash; live <span class="count">(4 of 8 books in window pass)</span></summary>
+<details class="sub" open><summary>Liquidity gate &mdash; live <span class="count">(4 of 9 books in window pass)</span></summary>
 <div class="card"><table>
 <tr><th>To KO</th><th>Lg</th><th>Match</th><th>Min leg vol</th><th class="opt2">All three legs</th><th>Gate</th><th class="opt">Stage</th></tr>
-<tr><td class="dim">5.9h</td><td>DK1</td><td>Silkeborg vs Odense</td><td class="good">1,896</td><td class="dim opt2">1,896, 3,080, 11,881</td><td><span class="good">pass</span></td><td class="opt"><span class="good">quoted</span></td></tr>
-<tr><td class="dim">5.9h</td><td>SE1</td><td>Sirius vs IF Brommapojkarna</td><td class="good">2,769</td><td class="dim opt2">2,769, 29,787, 39,574</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
-<tr><td class="dim">5.9h</td><td>SE1</td><td>Vasteras SK FK vs Djurgardens IF</td><td class="good">1,317</td><td class="dim opt2">1,317, 4,067, 38,696</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
-<tr><td class="dim">8.2h</td><td>P1</td><td>Santa Clara vs Nacional</td><td class="dim">499</td><td class="dim opt2">499, 3,435, 6,312</td><td><span class="bad">&minus;0.5</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
-<tr><td class="dim">9.9h</td><td>CO1</td><td>Águilas Doradas vs Llaneros</td><td class="dim">419</td><td class="dim opt2">419, 3,048, 3,773</td><td><span class="bad">&minus;80</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
-<tr><td class="dim">10.9h</td><td>AR1</td><td>Banfield vs Belgrano Cordoba</td><td class="good">3,054</td><td class="dim opt2">3,054, 3,200, 6,631</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
-<tr><td class="dim">11.4h</td><td>BR2</td><td>Goias vs Londrina</td><td class="dim">17</td><td class="dim opt2">17, 433, 511</td><td><span class="bad">&minus;482</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
-<tr><td class="dim">11.9h</td><td>CO1</td><td>Independiente Medellin vs Millonarios</td><td class="dim">176</td><td class="dim opt2">176, 3,345, 4,600</td><td><span class="bad">&minus;324</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="dim">4.9h</td><td>DK1</td><td>Silkeborg vs Odense</td><td class="good">2,009</td><td class="dim opt2">2,009, 4,333, 13,806</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
+<tr><td class="dim">4.9h</td><td>SE1</td><td>Sirius vs IF Brommapojkarna</td><td class="good">2,973</td><td class="dim opt2">2,973, 36,447, 40,952</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
+<tr><td class="dim">4.9h</td><td>SE1</td><td>Vasteras SK FK vs Djurgardens IF</td><td class="good">1,507</td><td class="dim opt2">1,507, 4,356, 45,864</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
+<tr><td class="dim">7.2h</td><td>P1</td><td>Santa Clara vs Nacional</td><td class="dim">499</td><td class="dim opt2">499, 3,463, 9,756</td><td><span class="bad">&minus;0.5</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="dim">8.9h</td><td>CO1</td><td>Águilas Doradas vs Llaneros</td><td class="dim">419</td><td class="dim opt2">419, 3,063, 4,133</td><td><span class="bad">&minus;80</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="dim">9.9h</td><td>AR1</td><td>Banfield vs Belgrano Cordoba</td><td class="good">3,210</td><td class="dim opt2">3,210, 3,373, 6,631</td><td><span class="good">pass</span></td><td class="opt"><span class="dim">thin overround</span></td></tr>
+<tr><td class="dim">10.4h</td><td>BR2</td><td>Goias vs Londrina</td><td class="dim">17</td><td class="dim opt2">17, 433, 573</td><td><span class="bad">&minus;482</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="dim">10.9h</td><td>CO1</td><td>Independiente Medellin vs Millonarios</td><td class="dim">177</td><td class="dim opt2">177, 3,508, 4,600</td><td><span class="bad">&minus;322</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
+<tr><td class="dim">11.9h</td><td>CL1</td><td>A. Italiano vs Nublense</td><td class="dim">14</td><td class="dim opt2">14, 440, 1,627</td><td><span class="bad">&minus;486</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
 </table></div>
-<div class="note">gate <b>&ge; 500</b> on the thinnest leg (regime v4) · snapshot 0m old<br>last 1 day(s): <b>4</b> distinct books admitted, <b>4</b> turned away — the gate is letting through <b>50%</b> of what it sees · today 4 / 8</div>
+<div class="note">gate <b>&ge; 500</b> on the thinnest leg (regime v4) · snapshot 0m old<br>last 1 day(s): <b>4</b> distinct books admitted, <b>5</b> turned away — the gate is letting through <b>44%</b> of what it sees · today 4 / 9</div>
 <div class="note">The reject column shows how far <i>short</i> a book fell, so a gate set too high shows up as a column of near-misses rather than as nothing at all. Books are counted once per day, and one that later trades enough volume to clear the gate stops counting as rejected.</div>
 </details>
 <details class="sub"><summary>Why the gate is at 500 <span class="count">(threshold sweep)</span></summary>
