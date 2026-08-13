@@ -113,7 +113,7 @@ tr.hidden{display:none}
 </head><body>
 <div class="topbar"><div>
 <h1>Soccer xlow tracker</h1>
-<div class="sub">snapshot 2026-08-13 17:05 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
+<div class="sub">snapshot 2026-08-13 18:05 · frozen rule since 2026-07-05 · caps $1/order both venues</div>
 </div><div class="tools">
 <input class="filter" id="filterBox" type="search" placeholder="Filter league / team…" aria-label="Filter rows">
 <button class="tool" id="expandBtn">Collapse all</button>
@@ -473,12 +473,12 @@ tr.hidden{display:none}
 <tr><td class="dim">07-26</td><td>NWSL</td><td>Washington Spirit W vs Denver Summit W</td><td class="good">3/3</td><td class="dim opt">away,draw,home</td><td><span class="dim">—</span></td><td class="dim opt2">+2.0c</td><td class="dim opt">v1</td><td class="good">+0.9c</td></tr>
 </table></div></details>
 <div class="note" style="border-left:3px solid var(--warn);padding-left:9px"><b>These are CEILING numbers, not results.</b> Fills here come from mm_settle, which counts any trade printed at or above our ask as ours &mdash; it ignores queue position, and its own docstring calls it a ceiling. The live quoter uses a stricter queue-aware test, and the two disagree: the settler scores 59 books as 2-of-3 while the quoter took no action on 39 of them, because it never believed two legs had sold. Completion rates and the P&amp;L split above are therefore upper bounds. The live view is now being archived to <code>mm_live_fills.csv</code> so the gap can be measured rather than guessed at.</div>
-<details class="sub" open><summary>Liquidity gate &mdash; live <span class="count">(0 of 0 books in window pass)</span></summary>
+<details class="sub" open><summary>Liquidity gate &mdash; live <span class="count">(0 of 1 books in window pass)</span></summary>
 <div class="card"><table>
 <tr><th>To KO</th><th>Lg</th><th>Match</th><th>Min leg vol</th><th class="opt2">All three legs</th><th>Gate</th><th class="opt">Stage</th></tr>
-<tr><td colspan="7" class="dim">no books in the 12.0h window right now</td></tr>
+<tr><td class="dim">11.9h</td><td>JP1</td><td>Tokyo Verdy vs Kashiwa Reysol</td><td class="dim">6</td><td class="dim opt2">6, 587, 1,210</td><td><span class="bad">&minus;493</span></td><td class="opt"><span class="dim">&mdash;</span></td></tr>
 </table></div>
-<div class="note">gate <b>&ge; 500</b> on the thinnest leg (regime v4) · snapshot 0m old<br>last 3 day(s): <b>7</b> distinct books admitted, <b>4</b> turned away — the gate is letting through <b>64%</b> of what it sees · today 0 / 0</div>
+<div class="note">gate <b>&ge; 500</b> on the thinnest leg (regime v4) · snapshot 0m old<br>last 3 day(s): <b>7</b> distinct books admitted, <b>5</b> turned away — the gate is letting through <b>58%</b> of what it sees · today 0 / 1</div>
 <div class="note">The reject column shows how far <i>short</i> a book fell, so a gate set too high shows up as a column of near-misses rather than as nothing at all. Books are counted once per day, and one that later trades enough volume to clear the gate stops counting as rejected.</div>
 </details>
 <details class="sub"><summary>Why the gate is at 500 <span class="count">(threshold sweep)</span></summary>
